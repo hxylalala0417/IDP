@@ -28,14 +28,14 @@ func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) stri
 
 	response := Response{} // 解析json数据并将数据存储在response结构体中
 	if err := json.Unmarshal([]byte(body), &response); err == nil {
-		fmt.Println(response)
+		//fmt.Println(response)
 	} else {
 		fmt.Println(err)
 	}
 	//json.Unmarshal(body, &response)
 	//fmt.Println(response)
 
-	fmt.Println(string(body))
+	//fmt.Println(string(body))
 
 	// body -> json -> 取出字段
 	return response.BuyAmount
