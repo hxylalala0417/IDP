@@ -13,7 +13,7 @@ import (
 type ZrxQuoter struct {
 }
 
-//Communicates with API and returns the response
+//requestQuoteAPI communicates with API and returns the response, handles err
 func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 	// queryParams: ?sellToken=%v&sellAmount=%v&buyToken=%v
 	url := consts.API_ENGPOINT_Mainnet + consts.API_QUOTE + queryParams
@@ -49,7 +49,7 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 	return response, nil
 }
 
-//Take the response, extract the BuyAmount field and returns it as a big.int
+//getOutputAmount takes the response, extracts the BuyAmount field and returns value as a big.int
 func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) (*big.Int, error) {
 	resp, err := p.requestQuoteAPI(fmt.Sprintf("?sellToken=%v&sellAmount=%v&buyToken=%v", sellToken, sellAmount, buyToken))
 	if err != nil {
@@ -61,11 +61,3 @@ func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) (*bi
 	i.SetString(resp.BuyAmount, 10)
 	return i, nil
 }
-
-//func (p *ZrxQuoter) getInputAmount(sellToken, , buyToken string,) (*big.Int, error) {
-//	resp, err := p.requestQuoteAPI(fmt.Sprintf("?sellToken=%v&buyAmount=%v&buyToken=%v", sellToken, sellAmount, buyToken))
-//	if err!=nil{
-//		return nil, err
-//	}
-//	return resp.BuyAmount, nil
-//}
