@@ -11,6 +11,7 @@ import (
 
 var Logger *zap.SugaredLogger
 
+//Init a logger, logLevel stands for the lowest error level that going to appear inside the log
 func Init(logFilePath string, logLevel zapcore.Level) error {
 	const LOG_FOLDER string = "./logs"
 	if Logger != nil {

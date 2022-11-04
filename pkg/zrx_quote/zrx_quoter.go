@@ -33,7 +33,7 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 		return nil, err
 	}
 	if res.StatusCode != 200 {
-		fmt.Printf("failed with status code %d", res.StatusCode)
+		//fmt.Printf("failed with status code %d", res.StatusCode)
 		err := errors.New("Endpoint response: " + res.Status)
 		fmt.Println("error: Endpoint response: " + res.Status)
 		return nil, err
