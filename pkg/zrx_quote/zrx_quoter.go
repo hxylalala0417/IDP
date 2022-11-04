@@ -55,7 +55,7 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 	return response, nil
 }
 
-//getOutputAmount takes the response, extracts the BuyAmount field and returns value as a big.int
+//getOutputAmount takes the response, extracts the BuyAmount field and returns the value as a big.int
 func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) (*big.Int, error) {
 	resp, err := p.requestQuoteAPI(fmt.Sprintf("?sellToken=%v&sellAmount=%v&buyToken=%v", sellToken, sellAmount, buyToken))
 	if err != nil {
@@ -66,5 +66,6 @@ func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) (*bi
 	//convert string to big int
 	i := new(big.Int)
 	i.SetString(resp.BuyAmount, 10)
+	//fmt.Printf("%T\n", i)
 	return i, nil
 }
