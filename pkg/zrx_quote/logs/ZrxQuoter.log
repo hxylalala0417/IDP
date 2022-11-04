@@ -1,0 +1,4 @@
+{"level":"WARN","ts":"2022-11-04T16:31:26.223+0100","caller":"zrx_quote/zrx_quoter.go:62","msg":"error","err":"requestQuoteAPI failed"}
+{"level":"WARN","ts":"2022-11-04T16:33:23.930+0100","caller":"zrx_quote/zrx_quoter.go:63","msg":"error","err":"requestQuoteAPI failed"}
+{"level":"WARN","ts":"2022-11-04T16:34:13.022+0100","caller":"zrx_quote/zrx_quoter.go:63","msg":"error","err":"requestQuoteAPI failed"}
+{"level":"WARN","ts":"2022-11-04T16:36:34.677+0100","caller":"zrx_quote/zrx_quoter.go:63","msg":"error","err":"requestQuoteAPI failed"}

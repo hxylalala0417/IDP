@@ -4,6 +4,7 @@ import (
 	"IDP/internal/logger"
 	"IDP/pkg/consts"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"math/big"
@@ -33,6 +34,8 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 	}
 	if res.StatusCode != 200 {
 		fmt.Printf("failed with status code %d", res.StatusCode)
+		err := errors.New("Endpoint response: " + res.Status)
+		fmt.Println("error: Endpoint response: " + res.Status)
 		return nil, err
 	}
 	body, err := ioutil.ReadAll(res.Body)
@@ -56,7 +59,7 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) (*big.Int, error) {
 	resp, err := p.requestQuoteAPI(fmt.Sprintf("?sellToken=%v&sellAmount=%v&buyToken=%v", sellToken, sellAmount, buyToken))
 	if err != nil {
-		fmt.Println("error:requestQuoteAPI failed")
+		fmt.Println("error: requestQuoteAPI failed")
 		logger.Logger.Warnw("error", "err", "requestQuoteAPI failed")
 		return nil, err
 	}
