@@ -31,7 +31,10 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 		logger.Logger.Warnw("Do error", "err", "Do function failed")
 		return nil, err
 	}
-
+	if res.StatusCode != 200 {
+		fmt.Printf("failed with status code %d", res.StatusCode)
+		return nil, err
+	}
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println("error: Read failed")
@@ -53,10 +56,11 @@ func (p *ZrxQuoter) requestQuoteAPI(queryParams string) (*Response, error) {
 func (p *ZrxQuoter) getOutputAmount(sellToken, sellAmount, buyToken string) (*big.Int, error) {
 	resp, err := p.requestQuoteAPI(fmt.Sprintf("?sellToken=%v&sellAmount=%v&buyToken=%v", sellToken, sellAmount, buyToken))
 	if err != nil {
-		fmt.Println("error: Unmarshal failed")
-		logger.Logger.Warnw("Unmarshal error", "err", "Unmarshal failed")
+		fmt.Println("error:requestQuoteAPI failed")
+		logger.Logger.Warnw("error", "err", "requestQuoteAPI failed")
 		return nil, err
 	}
+	//convert string to big int
 	i := new(big.Int)
 	i.SetString(resp.BuyAmount, 10)
 	return i, nil

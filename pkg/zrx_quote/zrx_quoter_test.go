@@ -15,8 +15,8 @@ func TestIsInRange(t *testing.T) {
 		fmt.Println("logger.Init failed", "err", err)
 		os.Exit(1)
 	}
-	_, err := zrx.getOutputAmount("ETH", "100000000000", "0x6b175474e89094c44da98b954eedeac495271d0f")
-	//res, _ := zrx.getOutputAmount("ETH", "100000000000", "0x6b175474e89094c44da98b954eedeac495271d0f")
-	//fmt.Println(res)
+	_, err := zrx.getOutputAmount("ETH", "10000000000000", "0x6b175474e89094c44da98b954eedeac495271d0f")
+	res, _ := zrx.getOutputAmount("ETH", "1", "0x6b175474e89094c44da98b954eedeac495271d0f")
+	fmt.Println(res)
 	assert.Nil(t, err)
 }
